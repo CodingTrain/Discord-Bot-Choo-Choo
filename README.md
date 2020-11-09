@@ -2,7 +2,7 @@
 
 [<img src="https://i.ytimg.com/vi/7A-bnPlxj4k/maxresdefault.jpg" alt="Discord Bot Tutorial" width="320">](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6avBYxeBSwF48YhAnSn_sA4)
 
-* 🚂 All aboard! [Coding Train Tutorial Videos](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6avBYxeBSwF48YhAnSn_sA4)
+🚂🌈💖🤖 All aboard! [Coding Train Tutorial Videos](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6avBYxeBSwF48YhAnSn_sA4) 🚂🌈💖🤖
 
 ## Steps to create new bot 
 
