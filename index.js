@@ -1,40 +1,23 @@
-const Discord = require('discord.js');
+// Command Handler
+// Discord Bots
+// The Coding Train / Daniel Shiffman
+// https://thecodingtrain.com/learning/bots/discord/06-command-handler.html
+// https://youtu.be/B60Q74FHFBQ
+
+console.log("Beep beep! 🤖");
+
+require("dotenv").config();
+
+const Discord = require("discord.js");
 const client = new Discord.Client();
+client.login(process.env.BOTTOKEN);
 
-require('dotenv').config();
-
-const serverID = process.env.SERVERID;
-const channelID = process.env.CHANNELID;
-
-console.log('Beep beep! 🤖');
-
-const Discord = require('discord.js');
-const client = new Discord.Client();
-// I recommend using dotenv, you can see how the project is setup here: 
-// https://github.com/CodingTrain/Discord-Bot-Choo-Choo
-// dotenv will be covered in a future video
-client.login(process.env.TOKEN);
-
-client.on('ready', readyDiscord);
+client.on("ready", readyDiscord);
 
 function readyDiscord() {
-  console.log('💖');
+  console.log("💖");
 }
 
-const replies = [
-  '🚂🌈💖',
-  'Choo choo!',
-  'Ding! 🛎',
-  'Never forget this dot!'
-]
+const commandHandler = require("./commands");
 
-client.on('message', gotMessage);
-
-function gotMessage(msg) {
-  if (msg.guild.id === serverID && msg.channel.id === channelID) {
-    if (msg.content === '!choochoo') {
-      const index = Math.floor(Math.random() * replies.length);
-      msg.channel.send(replies[index]);
-    }
-  }
-}
+client.on("message", commandHandler);
