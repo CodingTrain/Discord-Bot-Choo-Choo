@@ -6,7 +6,7 @@
 
 const fetch = require("node-fetch");
 
-module.exports = async (msg, args) => {
+module.exports = async (client, msg, args) => {
   let keywords = "coding train";
   if (args.length > 0) {
     keywords = args.join(" ");
