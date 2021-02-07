@@ -10,7 +10,6 @@ require("dotenv").config();
 
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const { MongoClient } = require("mongodb");
 
 client.login(process.env.BOTTOKEN);
 
@@ -20,6 +19,10 @@ function readyDiscord() {
   console.log("💖");
 }
 
+const { Database } = require("./managers/database");
+const { instance } = new Database();
+client.db = instance;
+
 const commandHandler = require("./commands");
 
-client.on("message", commandHandler);
+client.on("message", (msg) => commandHandler(client, msg));

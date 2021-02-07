@@ -4,30 +4,23 @@
 // https://thecodingtrain.com/learning/bots/discord/06-command-handler.html
 // https://youtu.be/B60Q74FHFBQ
 
-const { MongoClient } = require("mongodb");
-
-const mongoClient = new MongoClient(process.env.MONGO_CONNECTION_URI);
-let numbersDB;
-
-connectDB().catch(console.error);
-
-async function connectDB() {
-  try {
-    // Connect to the MongoDB cluster
-    await mongoClient.connect();
-    numbersDB = mongoClient.db("numbers").collection("people");
-    // const all = await getRunners();
-    // console.log(`There are ${all.length} database entries`);
-  } catch (e) {
-    console.error(`MongoDB connection error: ${e}`);
-  } finally {
-    // await mongoClient.close();
-  }
-}
-
-module.exports = function (msg, args) {
+module.exports = (client, msg, args) => {
   if (args.length > 0 && /^\d+$/.test(args[0])) {
     msg.channel.send(`Number set to ${args[0]}`);
+
+    //loading the number model
+    const NumberModel = client.db.model("number");
+
+    //reading all documents
+    NumberModel.find({}, (error, data) => {
+      if (error) console.error();
+      console.log(data);
+    });
+
+    //saving a document
+    const newNumber = new NumberModel();
+    newNumber.value = args[0];
+    newNumber.save();
   } else {
     msg.channel.send(`Please provide a valid whole number.`);
   }
