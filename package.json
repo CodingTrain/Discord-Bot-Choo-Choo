@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/shiffman/Discord-Bot-A2Z#readme",
   "dependencies": {
+    "canvas": "^2.6.1",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1"
