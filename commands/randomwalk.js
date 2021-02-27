@@ -1,15 +1,30 @@
 const { createCanvas } = require("canvas");
 const Discord = require("discord.js");
+// const p5 = require("p5");
+const fs = require("fs");
 
-// const fs = require("fs");
+// Loading sequence of random numbers
+const rawDigits = fs.readFileSync("./digits.txt", "utf-8");
+const digits = rawDigits.split(/[\s\n]+/g);
+const randomS = digits.filter((elt, index) => index % 11 !== 0);
+const randoms = randomS.map((elt) => parseInt(elt));
 
 module.exports = function (msg, args) {
-  const buffer = generateImage();
+  console.log("generating...");
+  let startingIndex = Math.floor(Math.random() * randoms.length);
+  // TODO: check that argument is valid number between 0 and 199999
+  if (args.length > 0) {
+    startingIndex = parseInt(args[0]);
+  }
+  const buffer = generateImage(startingIndex);
   const attachment = new Discord.MessageAttachment(buffer, "randomwalk.png");
-  msg.channel.send(`Here is your random walk!`, attachment);
+  msg.channel.send(
+    `Here is your random walk starting at ${startingIndex}!`,
+    attachment
+  );
 };
 
-function generateImage() {
+function generateImage(offset) {
   const width = 4880;
   const height = 1500;
   const canvas = createCanvas(width, height);
@@ -24,10 +39,11 @@ function generateImage() {
   let y = height / 2;
   const stepSize = 4;
   // randomSeed(parseInt(number.value()));
-  for (let i = 0; i < 1000000; i++) {
+  for (let i = 0; i < randoms.length; i++) {
     ctx.fillStyle = "black";
     ctx.fillRect(x, y, stepSize, stepSize);
-    const r = Math.floor(Math.random() * 4);
+    const index = (i + offset) % randoms.length;
+    const r = randoms[index] % 4;
     switch (r) {
       case 0:
         x = x + stepSize;
