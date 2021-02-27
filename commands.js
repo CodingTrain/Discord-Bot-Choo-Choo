@@ -6,8 +6,9 @@
 
 const gif = require("./commands/gif.js");
 const choochoo = require("./commands/choochoo.js");
+const randomwalk = require("./commands/randomwalk.js");
 
-const commands = { choochoo, gif };
+const commands = { choochoo, gif, randomwalk };
 
 module.exports = async function (msg) {
   if (msg.channel.id == "715786219770085396") {
