@@ -4,6 +4,8 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 
 //TODO: add dynamic list depending on permissions, then move into objects within files
 
+//choochoo, gif, randomwalk, find, assign, getnumber, userdb, mynumber, set, help, easteregg, supporterdb, random, reading, setreading 
+
 const commands = [
     {name:"choochoo",
     description:"Like ping, but more fun."}, 
@@ -14,8 +16,8 @@ const commands = [
     {name:"randomwalk",
     description:"Generate a random walk with !randomwalk <numberFromBook>"}, 
 
-    {name:"getposition",
-    description:"Get the position of a number in the book !getposition <number>"}, 
+    {name:"find",
+    description:"Get the position of a number in the book !find <number>"}, 
 
     {name:"assign",
     description:"Admin command, assign a number to a user."}, 
@@ -32,8 +34,8 @@ const commands = [
     {name:"mynumber",
     description:"Check your own number! If you haven't set one, use !setmynumber <number>"}, 
 
-    {name:"setmynumber",
-    description:"Set your number! !setmynumber or !setmynumber <number> if you're a supporter!"}, 
+    {name:"set",
+    description:"Set your number! !set or !set <number> if you're a supporter!"}, 
 
     {name:"help",
     description:"Get this list of commands!"}, 
@@ -44,11 +46,11 @@ const commands = [
     {name:"randomnumber",
     description:"Get a random number from the book!"}, 
 
-    {name:"bookPosition",
+    {name:"reading",
     description:"Check where Shiffman last stopped reading the book of random numbers!"}, 
 
-    {name:"setBookPosition",
-    description:"Set where Shiffman last stopped reading the book of random numbers!"}
+    {name:"setreading",
+    description:"Admin commmand, Set where Shiffman last stopped reading the book of random numbers!"}
 ]
 module.exports = function (msg, args){
     let helpEmbed = getDefaultEmbed()

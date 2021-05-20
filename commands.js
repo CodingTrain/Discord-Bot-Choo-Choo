@@ -13,14 +13,14 @@ const getnumber = require("./commands-book/getNumber.js");
 const userdb = require("./commands-book/getUserDB.js");
 const supporterdb = require("./commands-book/getSupporterDB.js");
 const mynumber = require("./commands-book/getOwnNumber.js");
-const setNumber = require("./commands-book/setOwnNumber.js");
+const set = require("./commands-book/setOwnNumber.js");
 const help = require("./utils/help.js")
 const easteregg = require("./commands-easteregg/easterEgg.js")
-const randomnumber = require("./commands-book/randomNumber.js")
+const random = require("./commands-book/randomNumber.js")
 const reading = require("./commands-book/bookPosition.js");
 const setreading = require("./commands-book/setBookPosition.js")
 
-const commands = {choochoo, gif, randomwalk, find, assign, getnumber, userdb, mynumber, setNumber, help, easteregg, supporterdb, randomnumber, reading, setreading};
+const commands = {choochoo, gif, randomwalk, find, assign, getnumber, userdb, mynumber, set, help, easteregg, supporterdb, random, reading, setreading};
 
 module.exports = async function (msg) {
 
