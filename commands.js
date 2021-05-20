@@ -23,7 +23,7 @@ const setreading = require("./commands-book/setBookPosition.js")
 const commands = {choochoo, gif, randomwalk, find, assign, getnumber, userdb, mynumber, set, help, easteregg, supporterdb, random, reading, setreading};
 
 module.exports = async function (msg) {
-
+    if(msg.channel.id != 715786219770085396){return}
     let tokens = msg.content.split(" ");
     let command = tokens.shift();
     if (command.charAt(0) === "?") {
