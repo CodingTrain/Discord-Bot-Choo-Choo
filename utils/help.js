@@ -54,7 +54,7 @@ module.exports = function (msg, args){
     let helpEmbed = getDefaultEmbed()
     if(!args[0]){
         helpEmbed.addFields([{
-            name:"Need more details?", value:"Try using !help <commandName>"
+            name:"Need more details?", value:"Try using ?help <commandName>"
         },{
             name:"The current commandlist", value:"The available commands are: " + commands.map(a=>a["name"]).join(", ")
         }])
@@ -64,13 +64,13 @@ module.exports = function (msg, args){
         let command = commands.find(a=>a["name"]==args[0])
         if(command){
             helpEmbed.addFields({
-                name:`!${command["name"]}`, value:`${command["description"]}`
+                name:`?${command["name"]}`, value:`${command["description"]}`
             })
             msg.channel.send(helpEmbed)
         }
         else{
             helpEmbed.addFields({
-                name:`!${args[0]}`, value:`I searched through my entire memory and couldn't find this command!`
+                name:`?${args[0]}`, value:`I searched through my entire memory and couldn't find this command!`
             })
             msg.channel.send(helpEmbed)
 
