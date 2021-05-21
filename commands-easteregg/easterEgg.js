@@ -2,13 +2,17 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 
 module.exports = function (msg, args) {
     let hints = [
-        {weight:25, text:"You almost got it! Keep trying for the keyword!"},
-        {weight:25, text:"Choo choo! Keep trying!"},
-        {weight:3, text:"Where are we again? Oh yea! Aboard the Coding Train!"},
+        {weight:30, text:"You almost got it! Keep trying for the keyword!"},
+        {weight:30, text:"Choo choo! Keep trying!"},
+        {weight:2, text:"Where are we again? Oh yea! Aboard the Coding Train!"},
         {weight:2, text:"🐇🐇🐇🐇🐇 EASTER BUNNYVASION 🐇🐇🐇🐇🐇"},
-        {weight:3, text:"Close! Have a bunny instead:🐰🥕 "},
-        {weight:3, text:"🥚  Hmmm... Not quite the right egg...  !"},
-        {weight:3, text:"Welcome aboard the train! Keep trying!"},
+        {weight:2, text:"Close! Have a bunny instead:🐰🥕 "},
+        {weight:2, text:"🥚  Hmmm... Not quite the right egg...  !"},
+        {weight:2, text:"Welcome aboard the train! Keep trying!"},
+        {weight:2, text:"You're on the right track! Get it?"},
+        {weight:2, text:"Maybe if you ask nicely you'll get a hint?"},
+        {weight:2, text:"You're getting there! The train is almost in the station!"},
+        {weight:2, text:"Wait.. this isn't the Coding Train?! Wrong platform!"},
         ];
     
     let nameField = "Try again!"
