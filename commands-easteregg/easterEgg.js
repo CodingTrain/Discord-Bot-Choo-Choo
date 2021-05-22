@@ -1,6 +1,6 @@
 const getDefaultEmbed = require("../utils/getDefaultEmbed")
 
-module.exports = function (msg, args) {
+module.exports = async function (msg, args) {
     let hints = [
         {weight:30, text:"You almost got it! Keep trying for the keyword!"},
         {weight:30, text:"Choo choo! Keep trying!"},
@@ -24,7 +24,7 @@ module.exports = function (msg, args) {
         success = true
         nameField = 'Congratulations!'
         valueField=  "You have earned the Blue Easter Egg Role!"
-        msg.member.roles.add(808684343219847168)
+        msg.member.roles.add("808684343219847168")
     }
     //Send result message to chat
     //TODO add random reaction hints
@@ -34,6 +34,7 @@ module.exports = function (msg, args) {
 
     if(success){
         easterEggEmbed.setColor('#0b1892')
+        await msg.delete()
     }
     
     msg.channel.send(easterEggEmbed);
