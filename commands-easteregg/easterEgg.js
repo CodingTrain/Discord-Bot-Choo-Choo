@@ -3,8 +3,8 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 module.exports = async function (msg, args) {
     let hints = [
         {weight:30, text:"You almost got it! Keep trying for the keyword!"},
-        {weight:30, text:"Choo choo! Keep trying!"},
-        {weight:2, text:"Where are we again? Oh yea! Aboard the Coding Train!"},
+        {weight:30, text:"Choo Choo! Keep trying!"},
+        {weight:2, text:"Where are we again? Oh yea! All aboard the Coding Train!"},
         {weight:2, text:"🐇🐇🐇🐇🐇 EASTER BUNNYVASION 🐇🐇🐇🐇🐇"},
         {weight:2, text:"Close! Have a bunny instead:🐰🥕 "},
         {weight:2, text:"🥚  Hmmm... Not quite the right egg...  !"},
@@ -20,7 +20,8 @@ module.exports = async function (msg, args) {
     let success = false
 
     //Check if user used the correct sentence
-    if(args[0] && args.join(" ") == process.env.EASTEREGG){
+    let correctAnswer = new RegExp(process.env.EASTEREGG, 'i')
+    if(args[0] && args.join(" ").match(correctAnswer)){
         success = true
         nameField = 'Congratulations!'
         valueField=  "You have earned the Blue Easter Egg Role!"
