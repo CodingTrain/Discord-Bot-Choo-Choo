@@ -22,7 +22,7 @@ module.exports = async function (msg, args) {
  
   let startingIndex = Math.floor(Math.random() * randoms.length);
 
-  if (args.length > 0 && parseInt(args[0])> 0 && parseInt(args[0]) < 200000 ) {
+  if (args.length > 0 && parseInt(args[0])>= 0 && parseInt(args[0]) < 200000 ) {
     startingIndex = parseInt(args[0]);
     success = true;
   }

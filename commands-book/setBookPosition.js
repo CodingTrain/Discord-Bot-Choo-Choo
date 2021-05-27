@@ -31,7 +31,7 @@ module.exports = async function (msg, args) {
             }
             await collectionUsers.replaceOne({"discordID":"bookPosition"}, newEntry);
 
-            responseText = `You have updated the book position to: ${page}, row ${row} and column ${column}`
+            responseText = `You have updated the book position to: page ${page}, row ${row} and column ${column}.`
 
         }
     }

@@ -24,7 +24,7 @@ module.exports = async function (msg, args) {
             responseText="";
             for(supporter of allUsers){
                 let tag = (await msg.client.users.fetch(supporter.discordID)).tag
-                responseText += `${tag} with the number ${supporter.randomNumber} \n`
+                responseText += `${tag} with the number ${supporter.randomNumber} at position ${supporter.position}\n`
             }
         }
     }

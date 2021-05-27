@@ -14,7 +14,7 @@ module.exports = async function (msg, args) {
     let cursor2 = collectionUsers.find();
     let bookInfo = (await cursor2.filter({"discordID":"bookPosition"}).toArray())[0];
 
-    responseText = `Shiffman last read the book at page ${bookInfo["page"]}, row ${bookInfo["row"]} and column ${bookInfo["column"]}`
+    responseText = `Shiffman will continue reading the book at page ${bookInfo["page"]}, row ${bookInfo["row"]} and column ${bookInfo["column"]}.`
     
     //Send result message to chat
     const reactionEmbed = getDefaultEmbed(success)

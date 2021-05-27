@@ -23,7 +23,7 @@ const commands = [
     description:"Admin command, assign a number to a user."}, 
 
     {name:"getnumber",
-    description:"Get the number on a position in the book !getnumber <position> or !getnumber <row> <column>"}, 
+    description:"Get the number on a position in the book ?getnumber <position> or ?getnumber <row> <column>"}, 
 
     {name:"supporterdb",
     description:"Admin command, get the list of supporters with their number."}, 
@@ -32,10 +32,10 @@ const commands = [
     description:"Admin command, get the list of users with their number."}, 
 
     {name:"mynumber",
-    description:"Check your own number! If you haven't set one, use !setmynumber <number>"}, 
+    description:"Check your own number! If you haven't set one, use ?set <number>"}, 
 
     {name:"set",
-    description:"Set your number! !set or !set <number> if you're a supporter!"}, 
+    description:"Set your number! ?set or ?set <number> if you're a supporter!"}, 
 
     {name:"help",
     description:"Get this list of commands!"}, 
@@ -43,7 +43,7 @@ const commands = [
     {name:"easteregg",
     description:"Try and hunt that mythical blue easter egg role!"}, 
 
-    {name:"randomnumber",
+    {name:"random",
     description:"Get a random number from the book!"}, 
 
     {name:"reading",
