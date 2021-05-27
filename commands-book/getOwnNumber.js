@@ -19,7 +19,7 @@ module.exports = async function (msg, args) {
         responseText = `${msg.member.displayName}, your saved random number is ${userData[0]["randomNumber"]} on position ${userData[0]["position"]}`
     }
     else{
-        responseText = "You haven't set a number yet! Use !setmynumber <number> to set it!"
+        responseText = "You haven't set a number yet! Use ?set <number> to set it!"
     }
     
     //Send result message to chat

@@ -11,10 +11,10 @@ const commands = [
     description:"Like ping, but more fun."}, 
 
     {name:"gif",
-    description:"Request a gif from tenor with !gif <searchTerm>"}, 
+    description:"Request a gif from tenor with ?gif <searchTerm>"}, 
 
     {name:"randomwalk",
-    description:"Generate a random walk with !randomwalk <numberFromBook>"}, 
+    description:"Generate a random walk with ?randomwalk <numberFromBook>"}, 
 
     {name:"find",
     description:"Get the position of a number in the book !find <number>"}, 
