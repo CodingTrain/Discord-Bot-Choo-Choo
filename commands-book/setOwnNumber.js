@@ -16,7 +16,7 @@ module.exports = async function (msg, args) {
     let allUsers = await cursor.toArray();
 
     //Check if user is a supporter
-    if(msg.member.roles.cache.has("664644927300435988")||msg.member.roles.cache.has("664825696912146453")||msg.member.roles.cache.has("660550479700557855")){
+    if(msg.member.roles.cache.has("664644927300435988")||msg.member.roles.cache.has("664825696912146453")||msg.member.roles.cache.has("660550479700557855")||msg.member.roles.cache.has("660550479700557855")){
         supporter = true;
     }
 

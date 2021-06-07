@@ -10,7 +10,7 @@ module.exports = async function (msg, args) {
     let success = false;
 
     //Check user permissions
-    if(!msg.member.permissions.has("ADMINISTRATOR")){
+    if(!msg.member.permissions.has("ADMINISTRATOR") && !msg.member.roles.cache.has("660550479700557855")){
         responseText = "You don't have permission to use this command!"
     }else{
         //Connect to database, no filter
