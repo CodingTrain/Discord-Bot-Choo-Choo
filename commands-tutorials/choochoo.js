@@ -7,8 +7,12 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 
 const replies = ["🚂🌈💖", "Choo choo!", "Ding! 🛎", "Never forget this dot!"];
 
-module.exports = function (msg, args) {
+module.exports = {
+  name: "choochoo",
+  description:"Like ping, but more fun.",
+  execute(msg, args) {
   const index = Math.floor(Math.random() * replies.length);
   let choochooEmbed = getDefaultEmbed(true).setDescription(replies[index])
   msg.channel.send(choochooEmbed);
+}
 };

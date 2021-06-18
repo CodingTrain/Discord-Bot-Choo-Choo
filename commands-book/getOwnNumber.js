@@ -2,7 +2,10 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 const getDatabase = require("../utils/getDatabase")
 
 
-module.exports = async function (msg, args) {
+module.exports = {
+    name:"mynumber",
+    description:"Check your own number! If you haven't set one, use ?set <number>",
+    async execute(msg, args) {
   
     collectionUsers = await getDatabase()
 
@@ -28,4 +31,4 @@ module.exports = async function (msg, args) {
         {name:"What I found in my dusty storage:", value:responseText}
     )
     msg.channel.send(reactionEmbed)
-}
+}};

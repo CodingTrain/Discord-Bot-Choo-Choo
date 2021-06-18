@@ -6,7 +6,10 @@ const getRandomNumber = require("../utils/getRandomNumber")
 const randoms = getNumbers();
 
 
-module.exports = async function (msg, args) {
+module.exports = {
+    name:"set",
+    description:"Set your number! ?set or ?set <number> if you're a supporter!",
+    async execute(msg, args) {
     let number = args[0]
     let success = false;
     let responseText = "";
@@ -86,4 +89,4 @@ module.exports = async function (msg, args) {
     )
     
     msg.channel.send(reactionEmbed)
-}
+}};

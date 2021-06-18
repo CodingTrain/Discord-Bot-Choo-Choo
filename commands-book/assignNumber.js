@@ -5,7 +5,10 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 const getDatabase = require("../utils/getDatabase")
 const randoms = getNumbers();
 
-module.exports = async function (msg, args) {
+module.exports = {
+name:"assign",
+description:"Admin command, assign a number to a user.",
+async execute(msg, args) {
 
   collectionUsers = await getDatabase()
 
@@ -86,4 +89,4 @@ module.exports = async function (msg, args) {
   { name: 'I have opened up my storage for you!', value: responseText }
   )
   msg.channel.send(reactionEmbed)
-};
+}};

@@ -7,7 +7,10 @@
 const fetch = require("node-fetch");
 const getDefaultEmbed = require("../utils/getDefaultEmbed")
 
-module.exports = async function (msg, args) {
+module.exports = {
+  name: "gif",
+  description:"Request a gif from tenor with ?gif <searchTerm>",
+  async execute(msg, args) {
   let result = await getGIF(args)
   
   const reactionEmbed = getDefaultEmbed(true)
@@ -24,7 +27,7 @@ module.exports = async function (msg, args) {
   }
 
   msg.channel.send(reactionEmbed);
-};
+}};
 
 async function getGIF(args = []){
   let keywords = "coding train";

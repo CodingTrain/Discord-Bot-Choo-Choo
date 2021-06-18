@@ -5,7 +5,10 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 // Loading sequence of random numbers
 const randoms = getNumbers();
 
-module.exports = function (msg, args) {
+module.exports = {
+    name:"getnumber",
+    description:"Get the number on a position in the book ?getnumber <position> or ?getnumber <row> <column>",
+    execution(msg, args) {
     let responseText = '';
     let success = false;
 
@@ -56,5 +59,5 @@ module.exports = function (msg, args) {
     msg.channel.send(reactionEmbed)
     
 
-  };
+  }};
 

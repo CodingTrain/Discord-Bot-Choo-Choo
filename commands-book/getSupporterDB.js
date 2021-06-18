@@ -2,7 +2,10 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 const getDatabase = require("../utils/getDatabase")
 
 
-module.exports = async function (msg, args) {
+module.exports = {
+    name:"supporterdb",
+    description:"Admin command, get the list of supporters with their number.",
+    async execute(msg, args) {
   
     collectionUsers = getDatabase()
 
@@ -23,8 +26,17 @@ module.exports = async function (msg, args) {
             success = true;
             responseText="";
             for(supporter of allUsers){
-                let tag = (await msg.client.users.fetch(supporter.discordID)).tag
+                let tag;
+                try{
+                    let user = await msg.client.users.fetch(supporter.discordID)
+                    tag = user.tag
+                }
+                catch{
+                    tag = "deleted user"
+                }
+            
                 responseText += `${tag} with the number ${supporter.randomNumber} at position ${supporter.position}\n`
+                
             }
         }
     }
@@ -36,4 +48,4 @@ module.exports = async function (msg, args) {
         {name:"The users:", value:responseText}
     )
     msg.channel.send(reactionEmbed)
-}
+}};

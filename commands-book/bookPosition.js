@@ -2,7 +2,10 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 const getDatabase = require("../utils/getDatabase")
 
 
-module.exports = async function (msg, args) {
+module.exports = {
+    name:"reading",
+    description:"Check where Shiffman last stopped reading the book of random numbers!",
+    async execute(msg, args) {
     
 
     let collectionUsers = await getDatabase()
@@ -22,4 +25,4 @@ module.exports = async function (msg, args) {
 		{ name: 'I looked back in time for you!', value: responseText }
 	)
     msg.channel.send(reactionEmbed)
-}
+}};

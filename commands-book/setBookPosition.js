@@ -2,7 +2,10 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 const getDatabase = require("../utils/getDatabase")
 
 
-module.exports = async function (msg, args) {
+module.exports = {
+    name:"setreading",
+    description:"Admin commmand, Set where Shiffman last stopped reading the book of random numbers!",
+    async execute(msg, args) {
     let success = false;
     let responseText;
 
@@ -42,4 +45,4 @@ module.exports = async function (msg, args) {
 		{ name: 'I stared at the book for a while!', value: responseText }
 	)
     msg.channel.send(reactionEmbed)
-}
+}};

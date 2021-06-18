@@ -3,7 +3,10 @@ const getIndexes = require("../utils/getIndexes");
 const getNumbers = require("../utils/getNumbers")
 const getDefaultEmbed = require("../utils/getDefaultEmbed")
 
-module.exports = async function (msg, args) {
+module.exports = {
+    name:"random",
+    description:"Get a random number from the book!",
+    async execute(msg, args) {
 
     //Pick randomNumber
     let number = await getRandomNumber();
@@ -19,4 +22,4 @@ module.exports = async function (msg, args) {
     )
     
     msg.channel.send(randomNumberEmbed);
-  };
+  }};

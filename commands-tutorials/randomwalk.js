@@ -9,7 +9,10 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 // Loading sequence of random numbers
 const randoms = getNumbers();
 
-module.exports = async function (msg, args) {
+module.exports = {
+  name: "randomwalk",
+  description:"Generate a random walk with ?randomwalk <numberFromBook>",
+  async execute(msg, args) {
   let success = false;
 
   const firstEmbed = getDefaultEmbed(true)
@@ -39,7 +42,7 @@ module.exports = async function (msg, args) {
 
   message.delete();
   msg.channel.send(finishedEmbed)
-};
+}};
 
 
 function generateImage(offset) {

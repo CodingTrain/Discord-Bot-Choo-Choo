@@ -5,7 +5,10 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 // Loading sequence of random numbers
 const randoms = getNumbers();
 
-module.exports = function (msg, args) {
+module.exports = {
+  name:"find",
+  description:"Get the position of a number in the book !find <number>",
+  execute (msg, args) {
     let responseText;
     let success = false;
     
@@ -44,5 +47,5 @@ module.exports = function (msg, args) {
 
     msg.channel.send(reactionEmbed)
 
-  };
+  }};
 

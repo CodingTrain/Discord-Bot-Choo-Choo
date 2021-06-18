@@ -20,4 +20,4 @@ function readyDiscord() {
 
 const commandHandler = require("./commands");
 
-client.on("message", commandHandler);
+client.on("message", commandHandler.execute);

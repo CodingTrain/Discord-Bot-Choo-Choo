@@ -1,8 +1,11 @@
 const getDefaultEmbed = require("../utils/getDefaultEmbed")
 const getDatabase = require("../utils/getDatabase")
 
-
-module.exports = async function (msg, args) {
+//TODO: Fix text overflow + add pagination
+module.exports = {
+    name:"userdb",
+    description:"Admin command, get the list of users with their number.",
+    async execute(msg, args) {
   
     collectionUsers = getDatabase()
 
@@ -23,8 +26,18 @@ module.exports = async function (msg, args) {
             responseText=""
             for(supporter of allUsers){
                 if(supporter.discordID != "bookPosition"){
-                    let tag = (await msg.client.users.fetch(supporter.discordID)).tag
-                    responseText += `${tag} with the number ${supporter.randomNumber} at position ${supporter.position}\n`
+                    let tag;
+                    try{
+                        let user = await msg.client.users.fetch(supporter.discordID)
+                        tag = user.tag
+                    }
+                    catch{
+                        tag = "deleted user"
+                    }
+                    next =  `${tag} with the number ${supporter.randomNumber} at position ${supporter.position}\n`
+                    if(responseText.length + next.length<1023){
+                        responseText += next
+                    }
                 }
             }
         }
@@ -36,4 +49,4 @@ module.exports = async function (msg, args) {
         {name:"The users:", value:responseText}
     )
     msg.channel.send(reactionEmbed)
-}
+}};

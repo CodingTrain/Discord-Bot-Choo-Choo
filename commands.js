@@ -4,32 +4,36 @@
 // https://thecodingtrain.com/learning/bots/discord/06-command-handler.html
 // https://youtu.be/B60Q74FHFBQ
 
-const gif = require("./commands-tutorials/gif.js");
-const choochoo = require("./commands-tutorials/choochoo.js");
-const randomwalk = require("./commands-tutorials/randomwalk.js");
-const find = require("./commands-book/getPosition.js");
-const assign = require("./commands-book/assignNumber.js");
-const getnumber = require("./commands-book/getNumber.js");
-const userdb = require("./commands-book/getUserDB.js");
-const supporterdb = require("./commands-book/getSupporterDB.js");
-const mynumber = require("./commands-book/getOwnNumber.js");
-const set = require("./commands-book/setOwnNumber.js");
+const fs = require('fs')
+const commands = {}
+
 const help = require("./utils/help.js")
-const easteregg = require("./commands-easteregg/easterEgg.js")
-const random = require("./commands-book/randomNumber.js")
-const reading = require("./commands-book/bookPosition.js");
-const setreading = require("./commands-book/setBookPosition.js")
 
-const commands = {choochoo, gif, randomwalk, find, assign, getnumber, userdb, mynumber, set, help, easteregg, supporterdb, random, reading, setreading};
 
-module.exports = async function (msg) {
+const folders = ["./commands-book", "./commands-easteregg", "./commands-tutorials"]
+for(const folder of folders){
+  let commandFiles = fs.readdirSync(folder).filter(file => file.endsWith('.js'));
+  for (const file of commandFiles) {
+    const command = require(`${folder}/${file}`);
+    commands[command.name] =  command;
+  }
+}
+const helpCommand = require(`./utils/help.js`);
+commands[helpCommand.name] =  helpCommand;
+
+module.exports = {
+  name:"commandHandler",
+  commandList:commands,
+  async execute(msg) {
     if(msg.channel.id != 715786219770085396 && msg.channel.id != 847457657685934090 && msg.channel.id != 850094406470991942){return}
     let tokens = msg.content.split(" ");
     let command = tokens.shift();
     if (command.charAt(0) === "?") {
       command = command.substring(1).toLowerCase();
-      if(commands[command]){
-        commands[command](msg, tokens);
+      for(commandOption of Object.keys(commands)){
+        if(commands[commandOption].name == command.toLowerCase()){
+          commands[commandOption].execute(msg, tokens)
+        }
       }
     }
-};
+}};
