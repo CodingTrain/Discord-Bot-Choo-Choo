@@ -19,7 +19,7 @@ module.exports = {
     //Validate if data exists
     if(userData.length){
         success = true;
-        responseText = `${msg.member.displayName}, your saved random number is ${userData[0]["randomNumber"]} on position ${userData[0]["position"]}`
+        responseText = `${msg.member.displayName}, your saved random number is ${userData[0]["randomNumber"]} at position ${userData[0]["position"]}`
     }
     else{
         responseText = "You haven't set a number yet! Use ?set <number> to set it!"

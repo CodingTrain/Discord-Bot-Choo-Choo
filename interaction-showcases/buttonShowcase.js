@@ -25,6 +25,7 @@ module.exports = {
             .setThumbnail())
             ;
             await reactionmessage.react('👍');
+            let resultEmbed = new getDefaultEmbed();
             await reactionmessage.awaitReactions(
                 (reaction,user)=>{
                     return (reactionEmoji==reaction.emoji.name && user.id == msg.author.id)
@@ -58,26 +59,28 @@ module.exports = {
                     }
 
                     await collectionsData.replaceOne({"discordID":discordID}, newEntry, {"upsert":true});
-                    console.log(collected)
 
-                    successmessage = await msg.channel.send(new getDefaultEmbed()
+                    resultEmbed
                     .setTitle(`You caught ${character_name}.`)
                     .addFields({name:"Well done!!", value:`You have caught ${character_name} ${collected[character_name]} times!`})           
+                    .attachFiles(`././img/${selected_file}`)
                     .setThumbnail(`attachment://${selected_file}`)
-                    )
-                    setTimeout(()=>successmessage.delete(),3000); 
+                    
+                    
                 }
             ).catch(
                 async collectedReactions =>{
-                    failedmessage = await msg.channel.send(new getDefaultEmbed(false)
+                    resultEmbed
                     .setTitle(`You failed to catch the ${character_name}.`)
                     .addFields({name:"Better luck next time!", value:"Make sure to react within 10 seconds."})           
+                    .attachFiles(`././img/${selected_file}`)
                     .setThumbnail(`attachment://${selected_file}`)
-                    )
-                    setTimeout(()=>failedmessage.delete(),3000); 
+                    
                 }
             )
             reactionmessage.delete();
+            resultMessage = await msg.channel.send(resultEmbed);
+            setTimeout(()=>resultMessage.delete(),3000); 
         }    
     }
 }
