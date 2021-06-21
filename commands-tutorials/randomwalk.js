@@ -5,6 +5,7 @@ const fs = require("fs");
 
 const getNumbers = require("../utils/getNumbers")
 const getDefaultEmbed = require("../utils/getDefaultEmbed")
+const getDatabase = require("../utils/getDatabase")
 
 // Loading sequence of random numbers
 const randoms = getNumbers();
@@ -25,17 +26,32 @@ module.exports = {
  
   let startingIndex = Math.floor(Math.random() * randoms.length);
 
-  if (args.length > 0 && parseInt(args[0])>= 0 && parseInt(args[0]) < 200000 ) {
-    startingIndex = parseInt(args[0]);
-    success = true;
+  cursor = (await getDatabase()).find();
+  userData = await cursor.filter({"discordID":msg.author.id}).toArray();
+
+
+  if(userData.length){
+      success = true;
+      startingIndex = +userData[0]["position"]
   }
+
+
+  if (args.length > 0 && parseInt(args[0])>= 0 && parseInt(args[0]) < 200000 ) {
+    success = true;
+    startingIndex = parseInt(args[0]);
+  }
+
+
+
+
+
   const buffer = generateImage(startingIndex);
   const attachment = new Discord.MessageAttachment(buffer, "randomwalk.png");
 
-  const finishedEmbed = getDefaultEmbed(true)
-	.setTitle('Randomwalk')
+  const finishedEmbed = getDefaultEmbed()
+	.setTitle('Random walk')
 	.addFields(
-		{ name: 'Here is your randomwalk!', value: success?`Generated starting from position ${startingIndex} in the book with random number ${randoms[startingIndex]}!`:`We couldn't use your input!\nGenerated starting from position ${startingIndex} in the book with random number ${randoms[startingIndex]} instead!  ` }
+		{ name: 'Here is your random walk!', value: success?`Generating your random walk with number ${randoms[startingIndex]} from position ${startingIndex}.`:`Picking random number ${randoms[startingIndex]} from position ${startingIndex} and generating random walk.` }
 	)
 	.attachFiles([attachment])
 	.setImage('attachment://randomwalk.png')
