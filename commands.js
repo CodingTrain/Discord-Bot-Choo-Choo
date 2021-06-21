@@ -4,46 +4,70 @@
 // https://thecodingtrain.com/learning/bots/discord/06-command-handler.html
 // https://youtu.be/B60Q74FHFBQ
 
-const fs = require('fs')
+
 require("dotenv").config();
-const commands = {}
+const getDefaultEmbed = require("./utils/getDefaultEmbed");
+const Discord = require("discord.js");
+const characterSpawner = require("./interaction-showcases/buttonShowcase.js");
 
-const help = require("./utils/help.js")
 
-
-const folders = ["./commands-book", "./commands-easteregg", "./commands-tutorials"]
-for(const folder of folders){
-  let commandFiles = fs.readdirSync(folder).filter(file => file.endsWith('.js'));
-  for (const file of commandFiles) {
-    const command = require(`${folder}/${file}`);
-    commands[command.name] =  command;
-  }
-}
-const helpCommand = require(`./utils/help.js`);
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-commands[helpCommand.name] =  helpCommand;
-
 
 module.exports = {
   name:"commandHandler",
-  commandList:commands,
   async execute(msg) {
 
+
     const client = msg.client;
-    //if(msg.channel.id != 715786219770085396 && msg.channel.id != 847457657685934090 && msg.channel.id != 850094406470991942){return}
+    const {cooldowns, commands} = client;
+    if (msg.author.bot) return;
+
+
+    for(let [,command] of commands){
+      if (!cooldowns.has(command.name)) {
+        cooldowns.set(command.name, new Discord.Collection());
+      }
+    }
+
+    
+    if(msg.channel.id != 715786219770085396 && msg.channel.id != 847457657685934090 && msg.channel.id != 850094406470991942){return}
     const prefix = process.env.PREFIX;
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
 
     if(!prefixRegex.test(msg.content)) return;
 
+
     const [, matchedPrefix] = msg.content.match(prefixRegex);
     const tokens = msg.content.slice(matchedPrefix.length).trim().split(/ +/);
-    const command = tokens.shift().toLowerCase() || "help";
+    let command = (tokens.shift().toLowerCase() || "help").toLowerCase();
+    
+    command = command.toLowerCase()
+
+    if(!commands.has(command)) return;
+        
+    command = client.commands.get(command);
+
+    const now = Date.now();
+    const timestampList = cooldowns.get(command.name);
+    const cooldownTimer = (command.cooldown || 5) * 1000;
+    const expire = timestampList.get(msg.author.id) + cooldownTimer;
+
+    if(timestampList.has(msg.author.id) && now < expire){
+        const timeLeft = ((expire - now) / 1000).toFixed(1);
+        cooldownMessage = await msg.channel.send(getDefaultEmbed(false).setTitle("This command is on cooldown!").addFields({name:"Time left", value: `You have to wait ${timeLeft} more seconds to use this command!`}))
+        return setTimeout(()=>cooldownMessage.delete(), 5000);
+      }
+    else{
+      timestampList.set(msg.author.id, now);
+    }
+    
+    msg.channel.startTyping();
+    await command.execute(msg, tokens);
+    msg.channel.stopTyping();
 
     
-    for(commandOption of Object.keys(commands)){
-      if(commands[commandOption].name == command.toLowerCase()){
-        commands[commandOption].execute(msg, tokens)
-      }
+    await characterSpawner.execute(msg);
+
+    }
     } 
-}};
+;

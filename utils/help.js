@@ -3,21 +3,23 @@ require("dotenv").config();
 
 module.exports ={
     name:"help",
-    description:"Get this list of commands!", 
+    description:"Get this list of commands!",
+    cooldown: 5, 
     execute(msg, args){
 
     const commands = require("../commands.js");
     let helpEmbed = getDefaultEmbed()
 
     let commandNames = []
-    let commandList = commands["commandList"]
+    let commandList = msg.client.commands
 
-    for(command of Object.keys(commandList)){
-        commandNames[commandList[command].name] = commandList[command].description.replace(/%prefix%/gi, process.env.PREFIX)
+    for(let [,command] of commandList){
+        commandNames[command.name] = command.description.replace(/%prefix%/gi, process.env.PREFIX)
         
     }
 
     if(!args[0]){
+
         helpEmbed.addFields([{
             name:"Need more details?", value:"Try using ?help <commandName>"
         },{
@@ -25,6 +27,7 @@ module.exports ={
         }])
         msg.channel.send(helpEmbed)
     }
+
     else{
         commandTest = args[0].toLowerCase()
         if(Object.keys(commandNames).includes(commandTest)){
