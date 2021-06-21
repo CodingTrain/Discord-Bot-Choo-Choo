@@ -7,7 +7,7 @@ const randoms = getNumbers();
 
 module.exports = {
   name:"find",
-  description:"Get the position of a number in the book !find <number>",
+  description:"Get the position of a number in the book %prefix%find <number>",
   execute (msg, args) {
     let responseText;
     let success = false;

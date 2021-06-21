@@ -7,7 +7,7 @@ const randoms = getNumbers();
 
 module.exports = {
 name:"assign",
-description:"Admin command, assign a number to a user.",
+description:"Admin command, assign a number to a user. %prefix%assign <userID> <position>",
 async execute(msg, args) {
 
   collectionUsers = await getDatabase()

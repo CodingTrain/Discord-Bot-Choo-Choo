@@ -1,4 +1,5 @@
 const getDefaultEmbed = require("../utils/getDefaultEmbed");
+require("dotenv").config();
 
 module.exports ={
     name:"help",
@@ -12,7 +13,7 @@ module.exports ={
     let commandList = commands["commandList"]
 
     for(command of Object.keys(commandList)){
-        commandNames[commandList[command].name] = commandList[command].description
+        commandNames[commandList[command].name] = commandList[command].description.replace(/%prefix%/gi, process.env.PREFIX)
         
     }
 

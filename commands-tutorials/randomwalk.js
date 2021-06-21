@@ -11,7 +11,7 @@ const randoms = getNumbers();
 
 module.exports = {
   name: "randomwalk",
-  description:"Generate a random walk with ?randomwalk <numberFromBook>",
+  description:"Generate a random walk with %prefix%randomwalk <numberFromBook>",
   async execute(msg, args) {
   let success = false;
 

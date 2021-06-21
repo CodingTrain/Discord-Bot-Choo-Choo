@@ -9,7 +9,7 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 
 module.exports = {
   name: "gif",
-  description:"Request a gif from tenor with ?gif <searchTerm>",
+  description:"Request a gif from tenor with %prefix%gif <searchTerm>",
   async execute(msg, args) {
   let result = await getGIF(args)
   

@@ -2,7 +2,7 @@ const getDefaultEmbed = require("../utils/getDefaultEmbed")
 
 module.exports = {
     name:"easteregg",
-    description:"Try and hunt that mythical blue easter egg role!",
+    description:"Try and hunt that mythical blue easter egg role! %prefix%easteregg <guess>",
     async execute(msg, args) {
     let hints = [
         {weight:30, text:"You almost got it! Keep trying for the keyword!"},

@@ -4,7 +4,7 @@ const getDatabase = require("../utils/getDatabase")
 
 module.exports = {
     name:"mynumber",
-    description:"Check your own number! If you haven't set one, use ?set <number>",
+    description:"Check your own number! If you haven't set one, use %prefix%set <number>",
     async execute(msg, args) {
   
     collectionUsers = await getDatabase()
