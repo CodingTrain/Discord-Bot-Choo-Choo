@@ -13,13 +13,13 @@ module.exports = {
 
         const characterImages = fs.readdirSync("././img").filter(file => file.endsWith('.png'));
         const selected_file = characterImages[Math.floor(Math.random()*characterImages.length)];
-        const character_name = selected_file.slice(0,-4);
+        const character_name = selected_file.slice(0,-4).split("_").reverse().join(" ");
 
         if(Math.random() < spawnChance){
             const reactionEmoji = '👍';
-            reactionmessage =  await msg.channel.send(new getDefaultEmbed()
+            let reactionmessage =  await msg.channel.send(new getDefaultEmbed()
             .setTitle(`A wild ${character_name} has appeared`)
-            .addFields({name:"Earn a point by catching it before it runs!", value:"Click the reaction to catch!"})
+            .addFields({name:"Catch it before it runs!", value:"Click the reaction to catch!"})
             .attachFiles(`././img/${selected_file}`)
             .setImage(`attachment://${selected_file}`)
             .setThumbnail())
@@ -79,7 +79,7 @@ module.exports = {
                 }
             )
             reactionmessage.delete();
-            resultMessage = await msg.channel.send(resultEmbed);
+            let resultMessage = await msg.channel.send(resultEmbed);
             setTimeout(()=>resultMessage.delete(),3000); 
         }    
     }

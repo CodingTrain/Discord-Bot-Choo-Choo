@@ -12,31 +12,39 @@ module.exports = {
     let responseText = "No users are found.";
     let success = false;
 
+    let usernames = ""
+    let positions = ""
+    let numbers = ""
+
     //Check user permissions
     if(!msg.member.permissions.has("ADMINISTRATOR") && !msg.member.roles.cache.has("660550479700557855")){
-        responseText = "You don't have permission to use this command!"
-    }else{
+        return msg.channel.send(getDefaultEmbed(false).addField("What I found in my dusty storage:","You don't have permission to use this command!"))
+    }
+    else{
         //Connect to database, no filter
         cursor2 = collectionUsers.find();
         allUsers = await cursor2.toArray();
 
         //Create string with all supporter entries
+
         if(allUsers.length){
             success = true;
             responseText=""
             for(supporter of allUsers){
                 if(supporter.discordID != "bookPosition"){
-                    let tag;
+                    let username;
                     try{
                         let user = await msg.client.users.fetch(supporter.discordID)
-                        tag = user.tag
+                        username = user.username
                     }
                     catch{
-                        tag = "deleted user"
+                        username = "deleted user"
                     }
-                    next =  `${tag} with the number ${supporter.randomNumber} at position ${supporter.position}\n`
-                    if(responseText.length + next.length<1023){
-                        responseText += next
+
+                    if(2+usernames.length + username.length<1023){
+                        usernames += username + "\n"
+                        positions += supporter.position + "\n"
+                        numbers += supporter.randomNumber + "\n"
                     }
                 }
             }
@@ -45,8 +53,12 @@ module.exports = {
 
     //Send result message to chat
     const reactionEmbed = getDefaultEmbed(success)
+    .setTitle("What I found in my dusty storage:")
     .addFields(
-        {name:"The users:", value:responseText}
+        {name:"Username", value: usernames, inline:true},
+        {name:"Position", value: positions, inline:true},
+        {name:"Number", value: numbers, inline:true},
     )
+
     msg.channel.send(reactionEmbed)
 }};

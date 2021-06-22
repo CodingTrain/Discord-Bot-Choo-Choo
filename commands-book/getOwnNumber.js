@@ -9,8 +9,6 @@ module.exports = {
   
     collectionUsers = await getDatabase()
 
-    let responseText = "";
-    let success = false;
 
     //Connect to database, filter to get users data
     cursor2 = collectionUsers.find();
@@ -18,17 +16,23 @@ module.exports = {
 
     //Validate if data exists
     if(userData.length){
-        success = true;
-        responseText = `${msg.member.displayName}, your saved random number is ${userData[0]["randomNumber"]} at position ${userData[0]["position"]}`
+        const reactionEmbed = getDefaultEmbed(true)
+        .setTitle("What I found in my dusty storage:")
+        .addFields(
+            {name:"Username", value: msg.member.displayName, inline:true},
+            {name:"Position", value: userData[0]["position"], inline:true},
+            {name:"Number", value: userData[0]["randomNumber"], inline:true},
+           )
+        msg.channel.send(reactionEmbed)
+        
     }
     else{
-        responseText = "You haven't set a number yet! Use ?set <number> to set it!"
+        const reactionEmbed = getDefaultEmbed(false)
+        .addFields(
+            {name:"What I found in my dusty storage:", value:`You haven't set a number yet, use ?set <number> to set one!`}
+        )
+        msg.channel.send(reactionEmbed)
     }
     
-    //Send result message to chat
-    const reactionEmbed = getDefaultEmbed(success)
-    .addFields(
-        {name:"What I found in my dusty storage:", value:responseText}
-    )
-    msg.channel.send(reactionEmbed)
+
 }};
