@@ -8,13 +8,13 @@ const randoms = getNumbers();
 
 module.exports = {
     name:"set",
-    description:"Set your number! %prefix%set or %prefix%set <number> if you're a supporter!",
+    description:"Set your number! %prefix%set or %prefix%set <position> if you're a supporter!",
     async execute(msg, args) {
-    let number = args[0]
+    let index = args[0]
     let success = false;
     let responseText = "";
-    let supporter = false;
-    collectionUsers = getDatabase()
+    let supporter = true;
+    collectionUsers = await getDatabase()
     let cursor = collectionUsers.find();
     let allUsers = await cursor.toArray();
 
@@ -24,32 +24,33 @@ module.exports = {
     }
 
     //Assign random value if user is no supporter or entered no value
-    if(!(supporter && number)  ){
-        number = await getRandomNumber(supporter)
+    if(!(supporter && index)  ){
+        index = Math.floor(Math.random()*randoms.length)
     }
     
     //Validate user input
-    if(!number || number!=parseInt(number)){
+    if(!index || index!=parseInt(index)){
         responseText = "BRRRRR... ERROR! Please provide a number for me to assign!"
     }
     else{
 
-        const paddedNumber = number.toString().padStart(5, "0")
-        let indexes = getIndexes(randoms, parseInt(paddedNumber))
+        let usedIndexes = []
+        //let indexes = getIndexes(randoms, parseInt(paddedNumber))
 
         //Filter available positions for supporters
         if(supporter){
             for(entry of allUsers){
-            indexes = indexes.filter(item => (0+item) != (0+entry["position"]))
+            usedIndexes.push(+entry["position"])
             }
         }
+        console.log(index, usedIndexes)
 
-        if(indexes.length == 0){
-            responseText = "All positions for this number have been assigned! Please choose another."
+        if(usedIndexes.includes(+index)){
+            responseText = `The position ${index} is already chosen by a supporter! \n Please choose another one!`
         }
         else{
             //Assign next available position
-            let position = indexes.shift();
+            let number = randoms[index];
             
             //Check for existing database entry
             cursor2 = collectionUsers.find();
@@ -59,7 +60,7 @@ module.exports = {
             let newEntry = {
                 "discordID":`${msg.author.id}`,
                 "randomNumber": `${number}`,
-                "position": `${position}`,
+                "position": `${index}`,
                 "supporter": `${supporter}`
             }
             success = true;
@@ -72,7 +73,7 @@ module.exports = {
                 await collectionUsers.insertOne(newEntry);
             }
 
-            responseText += `I have successfully saved the number ${number} to my memory for you ${msg.member.displayName}!`
+            responseText += `I have successfully saved the number ${number} on position ${index} to my memory for you ${msg.member.displayName}!`
         }
     }
     

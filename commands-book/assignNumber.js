@@ -29,37 +29,37 @@ async execute(msg, args) {
 
     //Check user input
     if(!discordID || discordID != parseInt(discordID)){
-      responseText = "Please enter a valid userID when assigning a random number"
+      responseText = "Please enter a valid userID when assigning a position."
     }
     else{
-      let number = args[1]
+      let position = args[1]
 
       //Check user input
-      if(!number || number != parseInt(number)){
-        responseText = "Please enter a valid number when assigning a random number"
+      if(!position || position != parseInt(position)){
+        responseText = "Please enter a valid position when assigning a position."
       }
       else{
 
-        const paddedNumber = number.padStart(5, "0")
-        let indexes = getIndexes(randoms, parseInt(paddedNumber))
-
         //Remove all used positions
-        for(entry of allUsers){
-          indexes = indexes.filter(item => (0+item) != (0+entry["position"]))
-        }
+        let usedIndexes = []
 
-        //Check if any positions are left
-        if(indexes.length == 0){
-          responseText = "All positions for this number have been assigned! Please choose another."
+        //Filter available positions for supporters
+
+        for(entry of allUsers){
+          usedIndexes.push(+entry["position"])
+        }
+        
+
+        if(usedIndexes.includes(+position)){
+            responseText = `The position ${position} is already chosen by a supporter! \n Please choose another one!`
         }
         else{
 
-          let position = indexes.shift();
 
           //Create database entry
           let newEntry = {
             "discordID":`${discordID}`,
-            "randomNumber": `${number}`,
+            "randomNumber": `${randoms[position]}`,
             "position": `${position}`,
             "supporter": `true`
           }
@@ -70,11 +70,11 @@ async execute(msg, args) {
           //Add or change the entry depending on previous entry
           if(userData.length){
             await collectionUsers.replaceOne({"discordID":discordID}, newEntry);
-            responseText =  `I have changed ${discordID} to the number ${number} on position ${position} in my storage!`
+            responseText =  `I have changed ${discordID} to the number ${randoms[position]} on position ${position} in my storage!`
           }
           else{
               await collectionUsers.insertOne(newEntry);
-              responseText =  `I have added ${discordID} with the number ${number} on position ${position} to my storage!`
+              responseText =  `I have added ${discordID} with the number ${randoms[position]} on position ${position} to my storage!`
           }
 
           success = true

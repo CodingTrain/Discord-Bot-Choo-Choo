@@ -8,7 +8,7 @@ module.exports = async function (supporter) {
     let position;
     collectionUsers = getDatabase()
     cursor = collectionUsers.find();
-    allUsers = await cursor.filter({"supporter":"true"}).toArray();
+    allUsers = await cursor.filter({"supporter":supporter}).toArray();
     while(!found){
         position = Math.floor(Math.random()*randoms.length)
         found = true;

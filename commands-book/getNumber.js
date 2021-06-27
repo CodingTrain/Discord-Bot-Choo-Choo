@@ -8,7 +8,7 @@ const randoms = getNumbers();
 module.exports = {
     name:"getnumber",
     description:"Get the number on a position in the book %prefix%getnumber <position> or %prefix%getnumber <row> <column>",
-    execution(msg, args) {
+    execute(msg, args) {
     let responseText = '';
     let success = false;
 

@@ -9,7 +9,7 @@ module.exports = {
     description:"Showcase buttons by earning points from random coding train characters.",
     async execute(msg) {
         
-        const spawnChance = 0;
+        const spawnChance = 0.01;
 
         const characterImages = fs.readdirSync("././img").filter(file => file.endsWith('.png'));
         const selected_file = characterImages[Math.floor(Math.random()*characterImages.length)];

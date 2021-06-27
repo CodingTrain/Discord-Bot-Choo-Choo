@@ -54,8 +54,8 @@ module.exports = {
 
     if(timestampList.has(msg.author.id) && now < expire){
         const timeLeft = ((expire - now) / 1000).toFixed(1);
-        cooldownMessage = await msg.channel.send(getDefaultEmbed(false).setTitle("This command is on cooldown!").addFields({name:"Time left", value: `You have to wait ${timeLeft} more seconds to use this command!`}))
-        return setTimeout(()=>cooldownMessage.delete(), 5000);
+        let cooldownMessage = await msg.channel.send(getDefaultEmbed(false).setTitle("This command is on cooldown!").addFields({name:"Time left", value: `You have to wait ${timeLeft} more seconds to use this command!`}))
+        return setTimeout(()=>{cooldownMessage.delete(), msg.delete()}, 5000);
       }
     else{
       timestampList.set(msg.author.id, now);

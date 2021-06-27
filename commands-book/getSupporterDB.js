@@ -20,30 +20,29 @@ module.exports = {
     if(!msg.member.permissions.has("ADMINISTRATOR") && !msg.member.roles.cache.has("660550479700557855")){
         return msg.channel.send(getDefaultEmbed(false).addField("What I found in my dusty storage:","You don't have permission to use this command!"))
     }
-    else{
-        //Connect to database, filter for supporters
-        cursor2 = collectionUsers.find();
-        allUsers = await cursor2.filter({"supporter":"true"}).toArray();
 
-        //Create string with all supporter entries
-        if(allUsers.length){
-            success = true;
-            responseText="";
-            for(supporter of allUsers){
-                let username;
-                try{
-                    let user = await msg.client.users.fetch(supporter.discordID)
-                    username = user.username
-                }
-                catch{
-                    username = "deleted user"
-                }
-            
-                if(2+usernames.length + username.length<1023){
-                    usernames += username + "\n"
-                    positions += supporter.position + "\n"
-                    numbers += supporter.randomNumber + "\n"
-                }
+    //Connect to database, filter for supporters
+    cursor2 = collectionUsers.find();
+    allUsers = await cursor2.filter({"supporter":"true"}).toArray();
+
+    //Create string with all supporter entries
+    if(allUsers.length){
+        success = true;
+        responseText="";
+        for(supporter of allUsers){
+            let username;
+            try{
+                let user = await msg.client.users.fetch(supporter.discordID)
+                username = user.username
+            }
+            catch{
+                username = "deleted user"
+            }
+        
+            if(2+usernames.length + username.length<1023){
+                usernames += username + "\n"
+                positions += supporter.position + "\n"
+                numbers += supporter.randomNumber.padStart(5, "0") + "\n"
             }
         }
     }

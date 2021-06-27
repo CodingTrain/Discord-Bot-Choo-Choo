@@ -44,7 +44,7 @@ module.exports = {
                     if(2+usernames.length + username.length<1023){
                         usernames += username + "\n"
                         positions += supporter.position + "\n"
-                        numbers += supporter.randomNumber + "\n"
+                        numbers += supporter.randomNumber.padStart(5, "0") + "\n"
                     }
                 }
             }
