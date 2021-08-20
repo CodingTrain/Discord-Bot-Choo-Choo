@@ -43,7 +43,6 @@ module.exports = {
             usedIndexes.push(+entry["position"])
             }
         }
-        console.log(index, usedIndexes)
 
         if(usedIndexes.includes(+index)){
             responseText = `The position ${index} is already chosen by a supporter! \n Please choose another one!`

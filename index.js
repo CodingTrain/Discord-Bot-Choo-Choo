@@ -16,7 +16,6 @@ client.cooldowns = new Discord.Collection();
 client.commands = new Discord.Collection();
 
 
-
 // rewrite commands to use Discord.Collection
 
 const folders = ["./commands-book", "./commands-easteregg", "./commands-tutorials"]

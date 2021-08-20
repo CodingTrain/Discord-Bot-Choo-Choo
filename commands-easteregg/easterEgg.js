@@ -49,7 +49,6 @@ function getItemFromWeightedList(list){
     let options = []
     for(i=0;i<list.length;i++){
         j=0
-        console.log(list[i]["weight"])
         while(j < list[i]["weight"]){
             options.push(list[i]["text"])
             j++

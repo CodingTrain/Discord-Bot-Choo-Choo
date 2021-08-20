@@ -12,6 +12,7 @@ module.exports ={
 
     let commandNames = []
     let commandList = msg.client.commands
+    
 
     for(let [,command] of commandList){
         commandNames[command.name] = command.description.replace(/%prefix%/gi, process.env.PREFIX)
@@ -23,13 +24,14 @@ module.exports ={
         helpEmbed.addFields([{
             name:"Need more details?", value:"Try using ?help <commandName>"
         },{
-            name:"The current commandlist", value:"The available commands are: " + Object.keys(commandNames).join(", ")
+            name:"The current commandlist", value:"The available commands are: " + Object.keys(commandNames).remove("survey-role").join(", ")
         }])
         msg.channel.send(helpEmbed)
     }
 
     else{
         commandTest = args[0].toLowerCase()
+        if(commandTest=="survey-role")return;
         if(Object.keys(commandNames).includes(commandTest)){
 
             helpEmbed.addFields({

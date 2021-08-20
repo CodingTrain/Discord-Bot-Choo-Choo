@@ -6,16 +6,17 @@ const getDatabase = require("../utils/getDatabase")
 
 module.exports = {
     name:"buttonShowcase",
-    description:"Showcase buttons by earning points from random coding train characters.",
+    description:"Showcase buttons by catching random coding train characters.",
     async execute(msg) {
         
-        const spawnChance = 0.01;
+        const spawnChance = 0.1;
 
         const characterImages = fs.readdirSync("././img").filter(file => file.endsWith('.png'));
         const selected_file = characterImages[Math.floor(Math.random()*characterImages.length)];
         const character_name = selected_file.slice(0,-4).split("_").reverse().join(" ");
 
-        if(Math.random() < spawnChance){
+        const seed = Math.random()
+        if(seed < spawnChance){
             const reactionEmoji = '👍';
             let reactionmessage =  await msg.channel.send(new getDefaultEmbed()
             .setTitle(`A wild ${character_name} has appeared`)

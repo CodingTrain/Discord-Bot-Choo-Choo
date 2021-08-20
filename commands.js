@@ -29,8 +29,8 @@ module.exports = {
       }
     }
 
-    
-    if(msg.channel.id != 715786219770085396 && msg.channel.id != 847457657685934090 && msg.channel.id != 850094406470991942){return}
+    const channelIDS = ["715786219770085396","847457657685934090","850094406470991942","834815546850803736"];
+    if(!channelIDS.includes(msg.channel.id)){return}
     const prefix = process.env.PREFIX;
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
 
