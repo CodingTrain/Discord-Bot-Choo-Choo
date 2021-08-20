@@ -13,7 +13,7 @@ module.exports = {
         nameField = 'Congratulations!'
         valueField=  "You have earned the Blue Easter Egg Role!"
 
-        msg.channel.send(resultEmbed = getDefaultEmbed(success)
+        msg.channel.send(resultEmbed = getDefaultEmbed()
         .setTitle('Easter Egg Time!')
         .addFields({name:nameField, value: valueField})
         )

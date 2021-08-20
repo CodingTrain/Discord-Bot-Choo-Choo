@@ -15,6 +15,7 @@ module.exports ={
     
 
     for(let [,command] of commandList){
+        if(command.name!="survey-role")
         commandNames[command.name] = command.description.replace(/%prefix%/gi, process.env.PREFIX)
         
     }
@@ -24,7 +25,7 @@ module.exports ={
         helpEmbed.addFields([{
             name:"Need more details?", value:"Try using ?help <commandName>"
         },{
-            name:"The current commandlist", value:"The available commands are: " + Object.keys(commandNames).remove("survey-role").join(", ")
+            name:"The current commandlist", value:"The available commands are: " + Object.keys(commandNames).join(", ")
         }])
         msg.channel.send(helpEmbed)
     }
