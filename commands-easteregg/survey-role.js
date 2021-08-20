@@ -11,14 +11,14 @@ module.exports = {
 
         //send embed
         nameField = 'Congratulations!'
-        valueField=  "You have earned the Blue Easter Egg Role!"
+        valueField=  "Thank you for participating in the survey! You have earned the Red Easter Egg Role!"
 
-        msg.channel.send(resultEmbed = getDefaultEmbed()
+        newMessage = await msg.channel.send(resultEmbed = getDefaultEmbed()
         .setTitle('Easter Egg Time!')
         .addFields({name:nameField, value: valueField})
         )
 
         //setTimeOut to remove embed
-        setTimeout(()=>resultEmbed.delete(),3000); 
+        setTimeout(()=>newMessage.delete(),3000); 
 }
 }
